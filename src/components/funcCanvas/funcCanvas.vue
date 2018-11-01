@@ -1,6 +1,6 @@
 <template>
   <div class="funcCanvas" v-show="basiccShowCA">
-    <div class="back" @click.stop.prevent="backtoApp">←</div>
+    <div class="back" @click.stop.prevent="backtoApp"></div>
     <div class = paintBoard>
       <div class="leftShow"><input type="text" class="showLeft" placeholder="左端点"></div>
       <div class="rightShow"><input type="text" class="showRight" placeholder="右端点"></div>
@@ -75,13 +75,14 @@ export default {
     this.basiccShowCA = this.headerShow5
     console.log('子组件被创建时的状态' + this.basiccShowCA)
   },
+  beforeDestroy () {
+    this.basiccShowCA = !this.basiccShowCA
+    let headerShowitCA = !this.basiccShowCA
+    console.log('事件是执行了的')
+    this.$emit('headerShowitCA', headerShowitCA)
+  },
   methods: {
     backtoApp () {
-      this.$router.go(-1)
-      this.basiccShowCA = !this.basiccShowCA
-      let headerShowitCA = !this.basiccShowCA
-      console.log('事件是执行了的')
-      this.$emit('headerShowitCA', headerShowitCA)
     },
     paintingNow () {
       var drawing = document.getElementsByClassName('mycanvas')[0]

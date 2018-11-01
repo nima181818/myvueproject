@@ -15,22 +15,22 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(api)
 var obj = []
-app.get('/api', (req, res) => {
-  db.find({}, function (err, docs) {
-    if (err) {
-      console.error(err)
-      return
-    }
-    obj = JSON.parse(JSON.stringify(docs))
-    console.log('xixi' + obj)
-    // res.send(obj)
-  })
-  res.json({
-    errno: 0,
-    data: obj
-
-  })
-})
+// app.get('/api/', (req, res) => {
+//   db.find({}, function (err, docs) {
+//     if (err) {
+//       console.error(err)
+//       return
+//     }
+//     obj = JSON.parse(JSON.stringify(docs))
+//     console.log('xixi' + obj)
+//     // res.send(obj)
+//   })
+//   res.json({
+//     errno: 0,
+//     data: obj
+//
+//   })
+// })
 app.use(cors({origin: '*'}))
 // 监听8088端口
 app.listen(8066)

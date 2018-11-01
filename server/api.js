@@ -10,16 +10,16 @@ router.use(cors({origin: '*'}))
 /** ************ 创建(create) 读取(get) 更新(update) 删除(delete) **************/
 
 // 获取已有账号接口
-var obj = []
-router.get('/', function (req, res) {
+var obj = ''
+router.get('/all', function (req, res) {
   db.thelegends.find({}, function (err, docs) {
     if (err) {
       console.error(err)
       return
     }
     obj = JSON.parse(JSON.stringify(docs))
-    console.log('xixi' + obj)
-    res.send(obj)
+    console.log('xixi' + docs)
+    res.json(obj)
   })
   return obj
 })

@@ -30,11 +30,16 @@ export default {
       password: '777'
     }
   },
+  beforeDestroy () {
+    let headerShowitRE = true
+    console.log('事件是执行了的')
+    this.$emit('headerShowitRE', headerShowitRE)
+  },
   methods: {
     validfy (id) {
       console.log('dede')
       // 实现登录
-      var url = 'http://localhost:8066/hero/loging'
+      var url = 'http://120.78.136.131:8066/hero/loging'
       var textHtml = this.$refs.textHtml.value
       var codeHtml = this.$refs.codeHtml.value
       this.name = textHtml
@@ -66,7 +71,7 @@ export default {
     registerIt () {
       console.log('注册点击成功')
       // 实现登录
-      var url = 'http://localhost:8066/hero/register'
+      var url = 'http://120.78.136.131:8066/hero/register'
       var textHtml = this.$refs.textHtml.value
       var codeHtml = this.$refs.codeHtml.value
       this.name = textHtml

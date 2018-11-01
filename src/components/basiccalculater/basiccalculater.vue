@@ -1,13 +1,13 @@
 <template>
   <div class="basiccalculater" v-show="basiccShow" @click="getAnswer">
-    <div class="back" @click.stop.prevent="makeHeadershow">←</div>
+    <div class="back" @click.stop.prevent="makeHeadershow"></div>
     <div class="workwindow">
       <input type="text" v-model="dd3">
     </div>
     <div class="operator" ref="fhFather">
 
         <button class="btn1" @click.stop.prevent="clearAll">c</button>
-        <button class="btn2">del</button>
+        <button class="btn2" @click.stop.prevent="reduceIt">del</button>
         <button class="btn3">+</button>
         <button class="btn4">-</button>
 
@@ -38,6 +38,7 @@
 import {accountIt} from '../../common/js/bcalculate'
 // import {calculatebasic} from '../../common/js/calculatebasic'
 import * as math from 'mathjs'
+// var newArray1 = []
 export default {
   name: 'basiccalculater',
   props: {
@@ -61,7 +62,7 @@ export default {
   },
   methods: {
     makeHeadershow () {
-      this.$router.go(-1)
+    //  history.go(-1)
       this.basiccShow = !this.basiccShow
       let headerShowit = !this.basiccShow
       console.log('事件是执行了的')
@@ -73,6 +74,14 @@ export default {
       this.dd2.push(result)
       this.dd3 = this.dd2.join('')
     },
+    reduceIt () {
+      var newArray1 = []
+      for (var i = 0; i < this.dd2.length - 1; i++) {
+        newArray1.push(this.dd2[i])
+      }
+      this.dd2 = newArray1
+      this.dd3 = newArray1.join('')
+    },
     getTheresult () {
       console.log(this.dd3)
       var lastNumber = math.eval(this.dd3)
@@ -82,14 +91,24 @@ export default {
       this.dd3 = ''
       this.dd2 = []
     }
-
   },
   mounted: function () {
+    // history.pushState({}, '')
+    // window.addEventListener('popstate', function (e) {
+    //   history.back()
+    // }, false)
   },
   created () {
     console.log('哈哈' + this.headerShow2)
+  },
+  beforeDestroy () {
+    this.basiccShow = !this.basiccShow
+    let headerShowit = !this.basiccShow
+    console.log('事件是执行了的')
+    this.$emit('headerShowit', headerShowit)
   }
 }
+
 </script>
 
 <style scoped>

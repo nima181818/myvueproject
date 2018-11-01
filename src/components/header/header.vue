@@ -6,9 +6,8 @@
       <div class="little-icon"></div>
       <div class="little-icon"></div>
     </div>
-    <transition name="designer"><div class="detail-wrapper" v-show="detailShow">
+    <transition name="designer"><div class="detail-wrapper" v-show="detailShow" @click="closeDesigner">
       <img src="./drwei.jpg">
-      <div class="close-designer" @click="closeDesigner">x</div>
     </div></transition>
   </div>
 </template>

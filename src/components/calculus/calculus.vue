@@ -1,6 +1,6 @@
 <template>
   <div class="calculus" v-show="basiccShowfc">
-    <div class="back" @click.stop.prevent="makeHeadershow">←</div>
+    <div class="back" @click.stop.prevent="makeHeadershow"></div>
     <div class="icon-s">∫</div>
     <div class="limit">
     <div class="top-limit"><input id="top1" type="text" placeholder="上限"></div>
@@ -52,17 +52,19 @@ export default {
   mounted () {
     console.log('fuckyou')
   },
+  beforeDestroy () {
+    this.basiccShowfc = !this.basiccShowfc
+    let headerShowitfc = !this.basiccShowfc
+    console.log('点击子组件返回时子组件状态' + this.basiccShowfc)
+    console.log('子传父的中间件' + headerShowitfc)
+    this.$emit('headerShowitfc', headerShowitfc)
+    this.show = false
+  },
   methods: {
     makeHeadershow () {
-      this.$router.go(-1)
-      this.basiccShowfc = !this.basiccShowfc
-      let headerShowitfc = !this.basiccShowfc
-      console.log('点击子组件返回时子组件状态' + this.basiccShowfc)
-      console.log('子传父的中间件' + headerShowitfc)
-      this.$emit('headerShowitfc', headerShowitfc)
     },
     opening () {
-      this.show = !this.show
+      this.show = true
     },
     getResults () {
       theResults = calculusIt()
@@ -71,7 +73,7 @@ export default {
       this.b = parseFloat(theResults[2])
       this.m = theResults[1]
       console.log(this.m)
-      var n = 1000000
+      var n = 100000
       var re = /x/g
       var reln = /ln/g
       var chln = 'log'

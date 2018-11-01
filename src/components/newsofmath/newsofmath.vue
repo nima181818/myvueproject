@@ -1,6 +1,6 @@
 <template>
   <div class="newsofmath" v-show="basiccShowNE">
-    <div class="back" @click.stop.prevent="backtoApp">←</div>
+    <div class="back" @click.stop.prevent="backtoApp"></div>
     <div class="legends-wrapper">
       <ul>
         <li v-for="(item,index) in legends" :key = "index" @click.stop.prevent = "showdetail($event)"  ref="avators">
@@ -44,16 +44,26 @@ export default {
     console.log('子组件被创建时的状态' + this.basiccShowNE)
   },
   created () {
-    this.$http.get('/api/').then((response) => {
-      var response1 = response.body
-      this.legends = response1.data
-      console.log('q请求已经发送')
-      console.log('获取的请求为' + this.legends)
-    })
+    this.$http.get('http://120.78.136.131:8066/all')
+      .then((response) => {
+        var response1 = response.body
+        this.legends = response.body
+        console.log('q请求已经发送' + response1)
+        console.log('获取的请求为' + this.legends)
+      })
+    // var url = 'http://120.78.136.131:8066/all'
+    // this.$axios({
+    //   method: 'get',
+    //   url: url
+    // }).then(function (res) {
+    //   // console.log(res)
+    //   this.legends = res.body
+    //   alert('接收数据成功')
+    //   console.log('获取的请求为' + this.legends)
+    // })
   },
   methods: {
     backtoApp () {
-      this.$router.go(-1)
       this.basiccShowNE = !this.basiccShowNE
       let headerShowitNE = !this.basiccShowNE
       console.log('事件是执行了的')
@@ -84,7 +94,14 @@ export default {
       this.detailShow = !this.detailShow
       this.avatorShow = !this.avatorShow
     }
+  },
+  beforeDestroy () {
+    this.basiccShowNE = !this.basiccShowNE
+    let headerShowitNE = !this.basiccShowNE
+    console.log('事件是执行了的')
+    this.$emit('headerShowitNE', headerShowitNE)
   }
+
 }
 </script>
 

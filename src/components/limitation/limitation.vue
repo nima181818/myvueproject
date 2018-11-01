@@ -1,6 +1,6 @@
 <template>
   <div class="limitation" v-show="basiccShowli">
-    <div class="back" @click.stop.prevent="backtoApp">←</div>
+    <div class="back" @click.stop.prevent="backtoApp"></div>
     <div class="workwindow">
       <div class="lim">lim</div>
       <div class="xlim">x→<input type="text" class="limx"></div>
@@ -85,6 +85,12 @@ export default {
         this.finalResults = ''
       }
     }
+  },
+  beforeDestroy () {
+    this.basiccShowli = !this.basiccShowli
+    let headerShowitli = !this.basiccShowli
+    console.log('事件是执行了的')
+    this.$emit('headerShowitli', headerShowitli)
   }
 }
 </script>

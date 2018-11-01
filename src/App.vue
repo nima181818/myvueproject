@@ -3,7 +3,8 @@
     <iheader :headerShow1="headerShow"></iheader>
     <div class="tab">
     <div class="tab-item" @click="hideother" v-show="headerShowB">
-      <router-link to="/components/basiccalculater/basiccalculater" class="stl" active-class="aactive">+-*÷</router-link>
+      <router-link to="/components/basiccalculater/basiccalculater" class="stl" active-class="aactive">
+        <img src="./components/basiccalculater/mult.jpg" class="theimg"></router-link>
     </div>
       <div class="tab-item" @click="hideotherfc" v-show="headerShowfc">
         <router-link to="/components/calculus/calculus" class="stl" active-class="aactive">
@@ -26,7 +27,7 @@
           <img src="./components/reglogin/relogin.jpg" class="theimg"></router-link>
       </div>
     </div>
-    <keep-alive><router-view
+    <router-view
       @headerShowit="okShowit"
       :headerShow2="temp"
       :headerShow3="tempfc"
@@ -38,7 +39,7 @@
       @headerShowitNE="okShowitNE"
       @headerShowitRE="okShowitRE"
       @headerShowitCA="okShowitCA"
-      @headerShowitfc="okShowitfc"></router-view></keep-alive>
+      @headerShowitfc="okShowitfc"></router-view>
   </div>
 </template>
 
@@ -231,11 +232,14 @@ export default {
     margin: 10px 10px 10px 10px;
     font-size: 20px;
     border-radius: 15%;
-    background: dodgerblue;
-    color: black;
+    background: rgb(0,122,131);
     text-align: center;
     line-height: 80px;
     float: left;
+  }
+  .app1 .tab .tab-item .st1{
+    text-decoration: none;
+    color: black;
   }
   .app1 .tab .tab-item .aactive{
     color:white;
